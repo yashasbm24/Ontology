@@ -1,0 +1,10 @@
+%%writefile extract.rq
+PREFIX ex: <http://example.com/edu#>
+
+SELECT ?courseName ?credits
+WHERE {
+    ?course a ex:Course .
+    ?course ex:credits ?credits .
+    BIND(REPLACE(STR(?course), "^.*#", "") AS ?courseName)
+}
+ORDER BY ?courseName

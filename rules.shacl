@@ -1,0 +1,13 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix ex: <http://example.com/edu#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ex:CourseShape a sh:NodeShape ;
+    sh:targetClass ex:Course ;
+    sh:property [
+        sh:path ex:credits ;
+        sh:datatype xsd:integer ;
+        sh:minInclusive 1 ;
+        sh:maxInclusive 4 ;
+        sh:message "SYSTEM BLOCK: Course credits must be a valid integer between 1 and 4!" ;
+    ] .
