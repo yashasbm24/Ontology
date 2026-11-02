@@ -69,16 +69,21 @@ If the data conforms to the SHACL rules, the script prints the query results. If
 
 ## Sample validation behavior
 
-The sample data currently includes a course with `"Three"` as its credits value. This is a string, not an integer, so it violates the SHACL constraints and causes the pipeline to stop at validation.
+The sample data in `main.py` is valid: both courses have integer credits within the allowed range, so the pipeline passes validation and reaches the SPARQL query.
 
-To let the sample reach the SPARQL query stage, change that course's credits value in `main.py` to an integer from 1 to 4, for example:
+To see the validation gate halt the pipeline, change a course's credits in `main.py` to an invalid value, for example a string:
 
 ```python
-"ECE554_Embedded_ML": {"credits": 3}
+"ECE554_Embedded_ML": {"credits": "Three"}
 ```
 
-Also ensure `extract.rq` contains only SPARQL: remove any `%%writefile extract.rq` line if present. That line is a Jupyter notebook magic command, not part of a SPARQL query file.
+or an integer outside the allowed range:
 
+```python
+"ECE554_Embedded_ML": {"credits": 5}
+```
+
+The script then prints `CRITICAL FAILURE: Pipeline Halted` along with the SHACL validation report, and does not run the query.
 ## Example output
 
 With valid course data and a valid SPARQL file, output includes the validation and query stages, followed by results similar to:
