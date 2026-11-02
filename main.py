@@ -9,7 +9,8 @@ ex = rdflib.Namespace("http://example.com/edu#")
 
 courses = {
     "AIT626_NLP_Theory": {"credits": 3},
-    "ECE554_Embedded_ML": {"credits": "Three"} # Error: Text instead of a number
+    #"ECE554_Embedded_ML": {"credits": "Three"}  Error: Text instead of a number
+    "ECE554_Embedded_ML": {"credits": 3}
 }
 
 for name, details in courses.items():
